@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="N:/NH/Java/Spring Jar/spring-web-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/mysql-connector-java-5.1.21.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-admin-manager-1.3.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-admin-resources-1.3.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-core-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-infrastructure-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-maven-plugin-0.2.5.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-samples-1.1.4.release.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-batch-test-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-jdbc-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Spring Batch/spring-security-core-4.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nizar/Downloads/maven-compiler-plugin-3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nizar/Downloads/maven-dependency-plugin-2.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nizar/Downloads/maven-eclipse-plugin-2.10.jar"/>
+	<classpathentry kind="lib" path="N:/NH/Java/Spring Jar/spring-beans-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nizar/Downloads/spring-core-4.2.3.RELEASE.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
