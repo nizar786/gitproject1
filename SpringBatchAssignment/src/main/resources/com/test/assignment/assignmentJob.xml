@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/batch
+                           http://www.springframework.org/schema/batch/spring-batch.xsd
+                           http://www.springframework.org/schema/beans
+       	                   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       	                    http://www.springframework.org/schema/util
+       	                   http://www.springframework.org/schema/util/spring-util-3.1.xsd
+       	                   http://www.springframework.org/schema/context
+		                   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<job id="assignmentJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="step1">
+			<tasklet>
+				<chunk reader="itemReader" writer="itemWriter" commit-interval="1" />
+			</tasklet>
+		</step>
+	</job>
+	
+	<bean id="itemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader"
+		scope="step">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sql"
+			value="SELECT firstname as FirstName,lastname as LastName ,max(type) as Type,max(address) as Address,max(state) as State , max(visits) as Visits FROM assignment.DATA_INPUT  group by firstname,lastname order by Type,Address;" />
+		<property name="rowMapper">
+			<bean class="com.test.assignment.RecordRowMapper" />
+		</property>
+	</bean>
+
+	<bean id="itemWriter" class="com.test.assignment.RecordItemWriter">
+		<property name="dataSource" ref="dataSource" />
+		<property name="insertSQL" value="${batch.insert.sql}"></property>
+	</bean>
+	
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+	
+	<!-- stored job-meta in memory --> 
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+</beans>
