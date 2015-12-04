@@ -1,0 +1,12 @@
+firstName,lastName,type,address,state,visits
+Mickey,Mouse,Main,"1 Minnie",Florida,
+Pluto,Dog,Side,,,
+Donald,Duck,Side,,,2
+Minnie,Mouse,Side,,,
+Minnie,Mouse,,"25 Mickey",California,5
+Mickey,Mouse,,"25 Mickey",,
+Donald,Duck,,,Florida,
+Pluto,Dog,,"10 Pluto",,
+Donald,Duck,,"20 Ducks",,
+Pluto,Dog,,,California,1
+Mickey,Mouse,,,,4
