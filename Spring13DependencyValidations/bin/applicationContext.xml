@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+<bean id="acc" class="com.rakesh.tech.pojo.Account" dependency-check="simple">
+	<property name="salary">
+		<value>1000</value>
+	</property>
+</bean>
+
+<bean id="empOne" class="com.rakesh.tech.pojo.Employee" dependency-check="objects" >
+	<!--<property name="account">
+		<ref bean="acc"/>
+	</property>
+--></bean>
+</beans>

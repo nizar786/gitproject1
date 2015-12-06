@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+                           http://www.springframework.org/schema/batch/spring-batch.xsd
+                           http://www.springframework.org/schema/beans
+       	                   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       	                    http://www.springframework.org/schema/util
+       	                   http://www.springframework.org/schema/util/spring-util-3.1.xsd
+       	                   http://www.springframework.org/schema/context
+		                   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<job id="assignmentJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="step1">
+			<tasklet>
+				<chunk reader="itemReader" processor="recordItemProcessor"
+					writer="itemWriter" commit-interval="1" skip-limit="100">
+					<skippable-exception-classes>
+						<include class="java.lang.Exception" />
+					</skippable-exception-classes>
+				</chunk>
+			</tasklet>
+		</step>
+	</job>
+
+	<bean id="itemReader" class="org.springframework.batch.item.file.FlatFileItemReader"
+		scope="step">
+		<property name="resource" value="classpath:csv/data_input.csv" />
+		<property name="linesToSkip" value="1" />
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean
+						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names"
+							value="FirstName,LastName,Type,Address,State,Visits" />
+						<property name="delimiter" value="," />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="com.test.assignment.RecordRowMapper" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="recordItemProcessor" class="com.test.assignment.RecordItemProcessor" />
+	<bean id="headerCallback" class="com.test.assignment.HeaderCallback" />
+
+	<bean id="itemWriter" class="org.springframework.batch.item.file.FlatFileItemWriter">
+		<property name="resource" value="file:output/data_output.csv" />
+		<property name="shouldDeleteIfExists" value="true" />
+		<property name="headerCallback" ref="headerCallback" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
+				<property name="delimiter" value="," />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="FirstName,LastName,Type,Address,State,Visits" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jobLauncher"
+		class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<!-- stored job-meta in memory -->
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+</beans>
